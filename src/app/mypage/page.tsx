@@ -2,13 +2,22 @@
 
 import { useEffect } from "react";
 import { useUserStore } from "../store/UserStore";
+import { baseApi } from "../lib/baseApi";
 
 export default function Page() {
-  const user = useUserStore((state) => state.user);
+  const accessToken = useUserStore((state) => state.accessToken);
+
+  const getEmployees = () => {
+    baseApi.get("/employees");
+  };
 
   useEffect(() => {
-    console.log("user >>> ", user);
-  }, [user]);
+    console.log("accessToken >>> ", accessToken);
+  }, [accessToken]);
+
+  useEffect(() => {
+    getEmployees();
+  }, []);
 
   return (
     <div>
